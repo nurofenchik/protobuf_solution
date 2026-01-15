@@ -4,18 +4,18 @@
 #include <iostream>
 
 int main() {
-    // Создаём одно сообщение
-    TestTask::Messages::WrapperMessage msg;
-    msg.mutable_fast_response()->set_current_date_time("19851019T050107.333");
-
-    // Сериализуем в length-prefixed формат
-    auto data = serializeDelimited(msg);
-
-    // Парсим поток
     DelimitedMessagesStreamParser<TestTask::Messages::WrapperMessage> parser;
-    auto messages = parser.parse(std::string(data->begin(), data->end()));
-
-    // Вывод результата
+    std::vector<PointerToConstData> dataset;
+    TestTask::Messages::WrapperMessage msg1;
+    msg1.mutable_fast_response()->set_current_date_time("HELLO");
+    auto first_data_pointer = serializeDelimited(msg1);
+    TestTask::Messages::WrapperMessage msg2;
+    msg2.mutable_fast_response()->set_current_date_time("WORLD");
+    auto second_data_pointer = serializeDelimited("msg2");
+    dataset.push_back(first_data_pointer);
+    dataset.push_back(second_data_pointer);
+    auto messages = parser.parse(std::string(dataset.begin() , dataset.end()));
+        // Вывод результата
     for (auto& m : messages) {
         if (m->has_fast_response()) {
             std::cout << "FastResponse: " 
@@ -28,4 +28,5 @@ int main() {
     }
 
     return 0;
+
 }
