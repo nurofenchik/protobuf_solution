@@ -16,20 +16,8 @@ include_directories(${CMAKE_BINARY_DIR})  # messages.pb.h
 set(PROTO_FILES ${CMAKE_SOURCE_DIR}/messages.proto)
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES})
 
-# ===================== Main executable =====================
-add_executable(parser_demo
-    parser_demo.cpp
-    ${PROTO_SRCS}
-)
 
-target_link_libraries(parser_demo
-    ${Protobuf_LIBRARIES}
-    absl::log
-    absl::check
-    absl::strings
-    absl::base
-    pthread
-)
+
 
 # ===================== Google Test =====================
 include(FetchContent)
