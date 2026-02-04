@@ -1,6 +1,0 @@
-/Users/nurofenchik/Desktop/projects/proto/protobuf_solution/build/CMakeFiles/TestsProtobuf.dir
-/Users/nurofenchik/Desktop/projects/proto/protobuf_solution/build/CMakeFiles/Test_DelimitedMessagesStreamParser.dir
-/Users/nurofenchik/Desktop/projects/proto/protobuf_solution/build/CMakeFiles/Test_Helpers.dir
-/Users/nurofenchik/Desktop/projects/proto/protobuf_solution/build/CMakeFiles/test.dir
-/Users/nurofenchik/Desktop/projects/proto/protobuf_solution/build/CMakeFiles/edit_cache.dir
-/Users/nurofenchik/Desktop/projects/proto/protobuf_solution/build/CMakeFiles/rebuild_cache.dir
