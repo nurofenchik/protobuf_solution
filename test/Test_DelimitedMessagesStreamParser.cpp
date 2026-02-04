@@ -11,7 +11,6 @@ TEST(Parser, OneFastRequest)
 
   TestTask::Messages::WrapperMessage message;
   message.mutable_request_for_fast_response();
-
   auto data = serializeDelimited(message);
   messages = parser.parse(std::string(data->begin(), data->end()));
   ASSERT_EQ(1, messages.size());

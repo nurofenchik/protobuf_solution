@@ -36,7 +36,6 @@ std::shared_ptr<Message> parseDelimited(const void* data, size_t size, size_t* b
 
     google::protobuf::uint32 messageSize;
     google::protobuf::io::CodedInputStream input(reinterpret_cast<const google::protobuf::uint8*>(data), size);
-    auto initialPosition = input.CurrentPosition();
     
     if ( (!input.ReadVarint32(&messageSize)) || (messageSize > size - google::protobuf::io::CodedOutputStream::VarintSize32(messageSize)) ) {
         if (bytesConsumed != nullptr) {
@@ -50,12 +49,15 @@ std::shared_ptr<Message> parseDelimited(const void* data, size_t size, size_t* b
     std::shared_ptr<Message> result = std::make_shared<Message>();
     
     if (!result->ParseFromCodedStream(&input)) {
+        if (bytesConsumed != nullptr) {
+            *bytesConsumed = input.CurrentPosition();
+        }
         throw std::runtime_error("Failed to parse the message.");
     }
 
     input.PopLimit(messageSize);
     if (bytesConsumed != nullptr) {
-        *bytesConsumed = input.CurrentPosition() - initialPosition;
+        *bytesConsumed = input.CurrentPosition();
     }
     return result;
 }
